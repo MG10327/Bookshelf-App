@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div>
-      <Logo width="80" height="80" />
+      <Logo width="800" height="80" />
       <h1>Bookshelf</h1>
       <div>
         <button onClick={() => setOpenModal('login')}>Login</button>
