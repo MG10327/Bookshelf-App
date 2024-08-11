@@ -1,0 +1,85 @@
+@import 'utilities.scss';
+
+.wrapper {
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-hold {
+    display: flex;
+}
+
+.button {
+    padding: 20px 20px;
+    border: 0;
+    line-height: 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px 10px 0 10px;
+}
+
+.button-variant {
+  background: #3f51b5;
+  color: white;
+    &:hover {
+        background: #4b60db;
+    }
+}
+
+.button-primary {
+    background: #f0f8ff;
+    color: #434449;
+    &:hover {
+        background: #cfe9ff;
+    }
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    > div {
+        margin: 10px auto;
+        width: 100%;
+        max-width: 300px;
+        display: contents;
+    }
+    input {
+        margin-bottom: 15px;
+    }
+}
+
+.form-btn {
+    margin: 10px auto 10px;
+    max-width: 140px;
+    width: 100%;
+}
+ // classes go inside
+ @media (min-width: 1200px) { /* Large */
+
+ }
+ @media (min-width: 1024px) and (max-width: 1199px) { /*iPadPro */
+ 
+ }
+ @media (min-width: 768px) and (max-width: 1023px) { /* iPadandMini*/
+ 
+ }
+ @media (min-width: 430px) and (max-width: 767px) { /*iPhone14Pro */
+ 
+ }
+ @media (min-width: 414px) and (max-width: 429px) { /* iPhoneXR_6Plus_7Plus_8Plus*/
+ 
+ }
+ @media (min-width: 390px) and (max-width: 413px) { /* iPhone12Pro*/
+ 
+ }
+ @media (min-width: 375px) and (max-width: 389px) { /*iPhoneSE_6_7_8_andX */
+ 
+ }
+ @media (min-width: 320px) and (max-width: 374px) { /*iPhone4_and_5SE */
+ 
+ }
