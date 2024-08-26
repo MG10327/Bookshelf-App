@@ -57,6 +57,11 @@ function StatusButtons({user, book}) {
 
   const listItem = listItems?.find(li => li.bookId === book.id) ?? null
 
+  const [remove] = useMutation(
+    ({id}) => client(`list-items/${id}`, {method: 'DELETE', token: user.token}),
+    {onSettled: () => queryCache.invalidateQueries('list-items')}
+  )
+
   const [create] = useMutation(
     ({bookId}) => client('list-items', {data: {bookId: book.id}, token: user.token}),
     {onSettled: () => queryCache.invalidateQueries('list-items')}
@@ -104,7 +109,7 @@ function StatusButtons({user, book}) {
         <TooltipButton
           label="Remove from list"
           highlight={colors.danger}
-          // onClick = {() => remove()}
+          onClick = {() => remove({id: listItem.id})}
           icon={<FaMinusCircle />}
         />
       ) : (
