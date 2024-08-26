@@ -10,8 +10,8 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import Tooltip from '@reach/tooltip'
-// 🐨 you'll need useQuery, useMutation, and queryCache from 'react-query'
-// 🐨 you'll also need client from 'utils/api-client'
+import {useQuery, useMutation, queryCache} from 'react-query'
+import {client} from 'utils/api-client'
 import {useAsync} from 'utils/hooks'
 import * as colors from 'styles/colors'
 import {CircleButton, Spinner} from './lib'
@@ -48,6 +48,7 @@ function TooltipButton({label, highlight, onClick, icon, ...rest}) {
 }
 
 function StatusButtons({user, book}) {
+
   // 🐨 call useQuery here to get the listItem (if it exists)
   // queryKey should be 'list-items'
   // queryFn should call the list-items endpoint
@@ -56,6 +57,9 @@ function StatusButtons({user, book}) {
   // one with the right bookId.
   const listItem = null
 
+  const [create] = useMutation(
+    () => client('list-items', {data: {bookId: book.id}, token: user.token})
+  )
   // 💰 for all the mutations below, if you want to get the list-items cache
   // updated after this query finishes then use the `onSettled` config option
   // to queryCache.invalidateQueries('list-items')
@@ -99,14 +103,14 @@ function StatusButtons({user, book}) {
         <TooltipButton
           label="Remove from list"
           highlight={colors.danger}
-          // 🐨 add an onClick here that calls remove
+          // onClick = {() => remove()}
           icon={<FaMinusCircle />}
         />
       ) : (
         <TooltipButton
           label="Add to list"
           highlight={colors.indigo}
-          // 🐨 add an onClick here that calls create
+          onClick = {() => create({bookId: book.id})}
           icon={<FaPlusCircle />}
         />
       )}
