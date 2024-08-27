@@ -19,6 +19,8 @@ function BookRow({user, book}) {
 
   const listItem = listItems?.find(li => li.bookId === book.id) ?? null
 
+// The above adds rating functionality for a book added to the read books list
+
   const id = `book-row-book-${book.id}`
 
   return (
