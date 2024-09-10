@@ -21,12 +21,17 @@ import {useAsync} from '../hooks'
 // do stuff/make assertions you want to after the promise has resolved
 
 // 🐨 flesh out these tests
-test('calling run with a promise which resolves', async () => {
+
+function deferred() {
     let resolve, reject
     const promise = new Promise((res, rej) =>{
         resolve = res
         reject = rej
     })
+}
+
+test('calling run with a promise which resolves', async () => {
+    const {promise, resolve} = deferred()
     const {result} = renderHook(() => useAsync())
         expect(result.current).toEqual({
             status: 'idle',
@@ -83,6 +88,10 @@ test('calling run with a promise which resolves', async () => {
             reset: expect.any(Function),
             setData: expect.any(Function),
             setError: expect.any(Function)
+        })
+
+        act(() => {
+            result.current.reset()
         })
 })
 
