@@ -28,6 +28,7 @@ function deferred() {
         resolve = res
         reject = rej
     })
+    return {promise, resolve, reject}
 }
 
 test('calling run with a promise which resolves', async () => {
