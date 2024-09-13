@@ -1,8 +1,17 @@
-// 🐨 you'll want a fake user to register as:
-// import {buildUser} from '../support/generate'
+import {buildUser} from '../support/generate'
 
 describe('smoke', () => {
   it('should allow a typical user flow', () => {
+    const user = buildUser()
+    cy.visit('/')
+
+    cy.findByRole('button', {name: /register/i}).click()
+
+    cy.findByRole('dialog').within(() => {
+      cy.findByRole('textbox', {name: /username/i}).type(user.username)
+      cy.findByLabel(/password/i).type(user.password)
+      cy.findByRole('button', {name: /register/i}).click()
+    })
     // 🐨 create a fake user
     // 🐨 visit '/' (📜 https://docs.cypress.io/api/commands/visit.html)
     // 🐨 find the button named "register" and click it
