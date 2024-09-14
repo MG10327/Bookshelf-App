@@ -33,5 +33,40 @@ describe('smoke', () => {
       cy.findByRole('listitem').should('have.length', 1)
       cy.findByRole('link', {name: /voice of war/i}).click()
     })
+
+    cy.findByRole('main').within(() => {
+      cy.findByRole('textbox', {name: /notes/i}).type('This is an awesome book')
+      cy.findByLabelText(/loading/i).should('exist')
+      cy.findByLabelText(/loading/i).should('not.exist')
+
+      cy.findByRole('button', {name: /mark as read/i}).click()
+
+      cy.findByRole('radio', {name: /5 stars/i}).click({force: true})
+    })
+
+    cy.findByRole('navigation').within(() => {
+      cy.findByRole('link', {name: /discover/i}).click()
+    })
+
+
+    cy.findByRole('main').within(() => {
+      cy.findByRole('listitem').should('have.length', 1)
+      cy.findByRole('radio', {name: /5 stars/i}).should('be.checked')
+      cy.findByRole('link', {name: /voice of war/i}).click()
+    })
+
+    cy.findByRole('main').within(() => {
+      cy.findByRole('button', {name: /remove from list/i}).should('not.exist')
+      cy.findByRole('button', {name: /notes/i}).should('not.exist')
+      cy.findByRole('button', {name: /5 stars/i}).should('not.exist')
+    })
+
+    cy.findByRole('navigation').within(() => {
+      cy.findByRole('link', {name: /finished books/i}).click()
+    })
+
+    cy.findByRole('main').within(() => {
+      cy.findByRole('listItem').should('have.length', 0)
+    })
   })
 })
